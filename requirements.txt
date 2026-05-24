@@ -1,0 +1,131 @@
+# ============================================================
+# Medical Chatbot — requirements.txt
+# Compatible with Python 3.10+ on Windows / Linux / Mac
+# Last updated: 2026
+# ============================================================
+
+# NOTE: torch is NOT listed here — install it separately first
+# using the command at the top of this file:
+#
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#
+# This installs the CUDA 12.1 build which works on RTX 4050.
+# Run that command BEFORE pip install -r requirements.txt
+
+# -------------------------------------------------------
+# Core ML / Training
+# -------------------------------------------------------
+transformers>=4.44.0
+peft>=0.12.0
+bitsandbytes>=0.43.3
+trl>=0.10.1
+accelerate>=0.34.0
+datasets>=2.21.0
+scipy>=1.13.0
+einops>=0.8.0
+sentencepiece>=0.2.0
+protobuf>=4.25.0
+safetensors>=0.4.4
+tokenizers>=0.19.0
+
+# -------------------------------------------------------
+# LLM Serving
+# NOTE: vLLM does NOT support Windows natively.
+# On Windows, skip vLLM — use Ollama instead (see README).
+# On Linux/WSL2, uncomment the line below:
+# vllm>=0.6.0
+# -------------------------------------------------------
+
+# -------------------------------------------------------
+# Agent Framework
+# -------------------------------------------------------
+langchain>=0.3.0
+langchain-community>=0.3.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+langsmith>=0.1.100
+
+# -------------------------------------------------------
+# Vector DB & RAG
+# -------------------------------------------------------
+qdrant-client>=1.11.0
+fastembed>=0.3.6
+sentence-transformers>=3.1.0
+rank-bm25>=0.2.2
+
+# -------------------------------------------------------
+# API & Web
+# -------------------------------------------------------
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+httpx>=0.27.0
+python-multipart>=0.0.9
+sse-starlette>=2.1.0
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+
+# -------------------------------------------------------
+# Sessions & Caching
+# -------------------------------------------------------
+redis>=5.0.8
+
+# -------------------------------------------------------
+# Database (audit logs)
+# -------------------------------------------------------
+asyncpg>=0.29.0
+sqlalchemy>=2.0.0
+
+# -------------------------------------------------------
+# Multimodal
+# -------------------------------------------------------
+openai-whisper>=20240930
+PyMuPDF>=1.24.0
+pytesseract>=0.3.13
+camelot-py[cv]>=0.11.0
+pydicom>=2.4.0
+Pillow>=10.4.0
+
+# -------------------------------------------------------
+# Multilingual
+# -------------------------------------------------------
+# fasttext wheels are OS-specific — install separately:
+# Windows: pip install fasttext-wheel
+# Linux:   pip install fasttext
+# fasttext-wheel>=0.9.2
+
+# -------------------------------------------------------
+# PII Scrubbing
+# -------------------------------------------------------
+presidio-analyzer>=2.2.354
+presidio-anonymizer>=2.2.354
+spacy>=3.7.0
+# After install, run: python -m spacy download en_core_web_lg
+
+# -------------------------------------------------------
+# Monitoring
+# -------------------------------------------------------
+prometheus-client>=0.21.0
+opentelemetry-api>=1.27.0
+opentelemetry-sdk>=1.27.0
+
+# -------------------------------------------------------
+# Data & Utilities
+# -------------------------------------------------------
+biopython>=1.84
+pandas>=2.2.0
+numpy>=1.26.0
+pyyaml>=6.0.2
+python-dotenv>=1.0.1
+tqdm>=4.66.0
+rich>=13.8.0
+click>=8.1.7
+tenacity>=9.0.0
+
+# -------------------------------------------------------
+# Dev & Testing
+# -------------------------------------------------------
+pytest>=8.3.0
+pytest-asyncio>=0.24.0
+pytest-cov>=5.0.0
+httpx>=0.27.0
+ruff>=0.6.0

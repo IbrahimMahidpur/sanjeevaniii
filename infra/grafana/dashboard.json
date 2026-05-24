@@ -1,0 +1,78 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "medchat-dashboard",
+    "title": "Medical Chatbot Monitoring",
+    "timezone": "browser",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "HTTP Requests Total",
+        "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "sum by (method, endpoint) (http_requests_total)",
+            "legendFormat": "{{method}} {{endpoint}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "HTTP Request Duration (seconds)",
+        "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum by (le, method, endpoint) (http_request_duration_seconds_bucket))",
+            "legendFormat": "95th {{method}} {{endpoint}}",
+            "refId": "B"
+          },
+          {
+            "expr": "histogram_quantile(0.5, sum by (le, method, endpoint) (http_request_duration_seconds_bucket))",
+            "legendFormat": "p50 {{method}} {{endpoint}}",
+            "refId": "C"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "LLM Response Latency",
+        "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum by (le) (llm_response_latency_seconds_bucket))",
+            "legendFormat": "p95",
+            "refId": "D"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "RAG Retrieval Latency",
+        "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum by (le) (rag_retrieval_latency_seconds_bucket))",
+            "legendFormat": "p95",
+            "refId": "E"
+          }
+        ]
+      },
+      {
+        "type": "stat",
+        "title": "Active Sessions",
+        "gridPos": { "x": 0, "y": 16, "w": 6, "h": 4 },
+        "targets": [
+          {
+            "expr": "active_sessions",
+            "refId": "F"
+          }
+        ]
+      }
+    ],
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "30s"
+  },
+  "overwrite": true
+}
